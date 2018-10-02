@@ -12,13 +12,13 @@ var gulp = require('gulp'),
 
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass', 'js'], function() {
+gulp.task('serve', ['sass'], function() {
 
     browserSync.init({
         server: "./"
     });
 
-    gulp.watch("src/js/**/*.js", ['js']);
+    // gulp.watch("src/js/**/*.js", ['js']);
     gulp.watch("src/scss/*.scss", ['sass']);
     gulp.watch("*.html").on('change', browserSync.reload);
 });
@@ -43,14 +43,14 @@ gulp.task('js', function () {
     return gulp.src('src/js/**/*.js')
         .pipe(sourcemaps.init())
         // .pipe(browserify({minify: false})) 
-        .pipe(babel({ 
+        .pipe(babel({  
                 presets: ['@babel/env']
             }))
         // .pipe(concat('bundle.min.js'))
         // .pipe(uglify({mangle: {toplevel: true}}))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/js/'));
-        browserSync.reload();
+        .pipe(gulp.dest('dist/js/')); 
+        // browserSync.reload();
 });
 
 // create a task that ensures the `js` task is complete before
